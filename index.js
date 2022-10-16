@@ -10,22 +10,20 @@ dotenv.config();
 
 app.use(express.json());
 
-const whitelist = [
-  "http://localhost:3000",
-  "https://comforting-griffin-fbd4f0.netlify.app/",
-];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  Credential: true,
-};
+app.options(
+  "*",
+  cors({
+    origin: "https://map-pin-backend.herokuapp.com/api",
+    optionsSuccessStatus: 200,
+  })
+);
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "https://map-pin-backend.herokuapp.com/api",
+    optionsSuccessStatus: 200,
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URL, {
