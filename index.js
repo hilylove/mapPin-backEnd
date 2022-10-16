@@ -10,20 +10,7 @@ dotenv.config();
 
 app.use(express.json());
 
-app.options(
-  "*",
-  cors({
-    origin: "https://map-pin-backend.herokuapp.com/",
-    optionsSuccessStatus: 200,
-  })
-);
-
-app.use(
-  cors({
-    origin: "https://map-pin-backend.herokuapp.com/",
-    optionsSuccessStatus: 200,
-  })
-);
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGO_URL, {
